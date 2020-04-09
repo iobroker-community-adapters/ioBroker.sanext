@@ -1,0 +1,282 @@
+{
+  "common": {
+    "name": "sanext",
+    "version": "0.0.1",
+    "news": {
+      "0.0.1": {
+        "en": "initial release",
+        "de": "Erstveröffentlichung",
+        "ru": "Начальная версия",
+        "pt": "lançamento inicial",
+        "nl": "Eerste uitgave",
+        "fr": "Première version",
+        "it": "Versione iniziale",
+        "es": "Versión inicial",
+        "pl": "Pierwsze wydanie",
+        "zh-cn": "首次出版"
+      }
+    },
+    "title": "Sanext heat meter",
+    "titleLang": {
+      "en": "Sanext heat meter",
+      "de": "Sanext heat meter",
+      "ru": "Sanext heat meter",
+      "pt": "Sanext heat meter",
+      "nl": "Sanext heat meter",
+      "fr": "Sanext heat meter",
+      "it": "Sanext heat meter",
+      "es": "Sanext heat meter",
+      "pl": "Sanext heat meter",
+      "zh-cn": "Sanext heat meter"
+    },
+    "desc": {
+      "en": "Receiving data from heat meters Sanext",
+      "de": "Receiving data from heat meters Sanext",
+      "ru": "Receiving data from heat meters Sanext",
+      "pt": "Receiving data from heat meters Sanext",
+      "nl": "Receiving data from heat meters Sanext",
+      "fr": "Receiving data from heat meters Sanext",
+      "it": "Receiving data from heat meters Sanext",
+      "es": "Receiving data from heat meters Sanext",
+      "pl": "Receiving data from heat meters Sanext",
+      "zh-cn": "Receiving data from heat meters Sanext"
+    },
+    "authors": [
+      "instalator <vvvalt@mail.ru>"
+    ],
+    "keywords": [
+      "Sanext",
+      "heat meter"
+    ],
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "main": "main.js",
+    "icon": "sanext.png",
+    "enabled": true,
+    "messagebox": true,
+    "extIcon": "https://raw.githubusercontent.com/instalator/ioBroker.sanext/master/admin/sanext.png",
+    "readme": "https://github.com/instalator/ioBroker.sanext/blob/master/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "energy",
+    "compact": true,
+    "materialize": true,
+    "stopBeforeUpdate": true,
+    "dependencies": [
+      {
+        "js-controller": ">=1.4.2"
+      }
+    ]
+  },
+  "native": {
+    "ip": "127.0.0.1",
+    "port": 21,
+    "pollingtime": 60000
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Device or service connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "Energy",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "Energy",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "tempIn",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "tempIn",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "tempOut",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "tempOut",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "tempDiff",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "tempDiff",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "power",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "power",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "volume",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "volume",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "rate",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "rate",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "imp1",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "imp1",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "imp2",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "imp2",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "imp3",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "imp3",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "imp4",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "imp4",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "rateEn",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "rateEn",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "timeWork",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "timeWork",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "sysTime",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "sysTime",
+        "type": "string",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
+}
