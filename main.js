@@ -154,7 +154,7 @@ function send(cmd, cb){
     const buf = Buffer.from(cmd);
     adapter.log.debug('Send cmd - [' + toHexString(buf) + ']');
     sanext.write(buf);
-} 
+}
 
 function toHexString(byteArray){
     return Array.from(byteArray, (byte) => {
