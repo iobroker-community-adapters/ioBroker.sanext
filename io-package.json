@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "sanext",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "news": {
-      "0.0.1": {
+      "0.0.2": {
         "en": "initial release",
         "de": "Erstveröffentlichung",
         "ru": "Начальная версия",
@@ -52,8 +52,8 @@
     "platform": "Javascript/Node.js",
     "main": "main.js",
     "icon": "sanext.png",
-    "enabled": true,
-    "messagebox": true,
+    "enabled": false,
+    "messagebox": false,
     "extIcon": "https://raw.githubusercontent.com/instalator/ioBroker.sanext/master/admin/sanext.png",
     "readme": "https://github.com/instalator/ioBroker.sanext/blob/master/README.md",
     "loglevel": "info",
@@ -71,7 +71,8 @@
   "native": {
     "ip": "127.0.0.1",
     "port": 21,
-    "pollingtime": 60000
+    "pollingtime": 60000,
+    "sn": ""
   },
   "objects": [],
   "instanceObjects": [
@@ -103,6 +104,7 @@
         "role": "state",
         "name": "Energy",
         "type": "number",
+        "unit": "Gcal",
         "read": true,
         "write": false,
         "def": false
@@ -114,8 +116,9 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "tempIn",
+        "name": "Feed temperature",
         "type": "number",
+        "unit": "°C",
         "read": true,
         "write": false,
         "def": false
@@ -127,8 +130,9 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "tempOut",
+        "name": "Return temperature",
         "type": "number",
+        "unit": "°C",
         "read": true,
         "write": false,
         "def": false
@@ -140,8 +144,9 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "tempDiff",
+        "name": "Temperature difference",
         "type": "number",
+        "unit": "°C",
         "read": true,
         "write": false,
         "def": false
@@ -153,8 +158,9 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "power",
+        "name": "Power",
         "type": "number",
+        "unit": "Gcal/h",
         "read": true,
         "write": false,
         "def": false
@@ -166,8 +172,9 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "volume",
+        "name": "Volume",
         "type": "number",
+        "unit": "m3",
         "read": true,
         "write": false,
         "def": false
@@ -179,8 +186,9 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "rate",
+        "name": "Consumption",
         "type": "number",
+        "unit": "m3/h",
         "read": true,
         "write": false,
         "def": false
@@ -192,8 +200,9 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "imp1",
+        "name": "Pulse input 1",
         "type": "number",
+        "unit": "m3",
         "read": true,
         "write": false,
         "def": false
@@ -205,8 +214,9 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "imp2",
+        "name": "Pulse input 2",
         "type": "number",
+        "unit": "m3",
         "read": true,
         "write": false,
         "def": false
@@ -218,8 +228,9 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "imp3",
+        "name": "Pulse input 3",
         "type": "number",
+        "unit": "m3",
         "read": true,
         "write": false,
         "def": false
@@ -231,8 +242,9 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "imp4",
+        "name": "Pulse input 4",
         "type": "number",
+        "unit": "m3",
         "read": true,
         "write": false,
         "def": false
@@ -244,8 +256,9 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "rateEn",
+        "name": "Consumption (energy)",
         "type": "number",
+        "unit": "m3/h",
         "read": true,
         "write": false,
         "def": false
@@ -257,8 +270,9 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "timeWork",
+        "name": "Normal working time",
         "type": "number",
+        "unit": "h",
         "read": true,
         "write": false,
         "def": false
@@ -270,7 +284,7 @@
       "type": "state",
       "common": {
         "role": "state",
-        "name": "sysTime",
+        "name": "System time",
         "type": "string",
         "read": true,
         "write": false,

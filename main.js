@@ -1,13 +1,7 @@
 'use strict';
 const utils = require('@iobroker/adapter-core');
 const net = require('net');
-let sanext;
-let adapter, pollAllowed = false, isOnline = false, reconnectTimeOut = null, timeoutPoll = null;
-let pollingInterval = null;
-let iter = 0;
-let cmd = [];
-
-const addr = [0x00, 0x64, 0x50, 0x92];
+let sanext, adapter, pollAllowed = false, reconnectTimeOut = null, timeoutPoll = null, timeout = null, pollingInterval = null, iter = 0, cmd = [], addr;
 
 function startAdapter(options){
     return adapter = utils.adapter(Object.assign({}, options, {
@@ -18,6 +12,7 @@ function startAdapter(options){
             clearTimeout(timeoutPoll);
             clearTimeout(reconnectTimeOut);
             clearTimeout(pollingInterval);
+            clearTimeout(timeout);
             if (sanext) sanext.destroy();
             try {
                 adapter.log.debug('cleaned everything up...');
@@ -29,9 +24,6 @@ function startAdapter(options){
         stateChange:  (id, state) => {
             if (id && state && !state.ack){
                 adapter.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-                const arr = id.split('.');
-                const sn = parseInt(arr[2]);
-                id = arr[arr.length - 1];
             }
         },
         message:      obj => {
@@ -45,85 +37,50 @@ function startAdapter(options){
 }
 
 const func = {
-    readEnergy: function (cmd, response){
-        adapter.log.info('readEnergy - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('Energy', +parseFloat(response.readFloatLE(6)).toFixed(4));
+    readEnergy: (response, cb) => {
+        setStates('Energy', +parseFloat(response.readFloatLE(6)).toFixed(4), () => cb());
     },
-    tempIn:     function (cmd, response){
-        adapter.log.info('tempIn - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('tempIn', +parseFloat(response.readFloatLE(6)).toFixed(4));
+    tempIn:     (response, cb) => {
+        setStates('tempIn', +parseFloat(response.readFloatLE(6)).toFixed(4), () => cb());
     },
-    tempOut:    function (cmd, response){
-        adapter.log.info('tempOut - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('tempOut', +parseFloat(response.readFloatLE(6)).toFixed(4));
+    tempOut:    (response, cb) => {
+        setStates('tempOut', +parseFloat(response.readFloatLE(6)).toFixed(4), () => cb());
     },
-    tempDiff:   function (cmd, response){
-        adapter.log.info('tempDiff - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('tempDiff', +parseFloat(response.readFloatLE(6)).toFixed(4));
+    tempDiff:   (response, cb) => {
+        setStates('tempDiff', +parseFloat(response.readFloatLE(6)).toFixed(4), () => cb());
     },
-    power:      function (cmd, response){
-        adapter.log.info('power - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('power', +parseFloat(response.readFloatLE(6)).toFixed(4));
+    power:      (response, cb) => {
+        setStates('power', +parseFloat(response.readFloatLE(6)).toFixed(4), () => cb());
     },
-    volume:     function (cmd, response){
-        adapter.log.info('volume - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('volume', +parseFloat(response.readFloatLE(6)).toFixed(4));
+    volume:     (response, cb) => {
+        setStates('volume', +parseFloat(response.readFloatLE(6)).toFixed(4), () => cb());
     },
-    rate:     function (cmd, response){
-        adapter.log.info('rate - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('rate', +parseFloat(response.readFloatLE(6)).toFixed(4));
+    rate:       (response, cb) => {
+        setStates('rate', +parseFloat(response.readFloatLE(6)).toFixed(4), () => cb());
     },
-    imp1:     function (cmd, response){
-        adapter.log.info('imp1 - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('imp1', response.readFloatLE(6));
+    imp1:       (response, cb) => {
+        setStates('imp1', response.readFloatLE(6), () => cb());
     },
-    imp2:     function (cmd, response){
-        adapter.log.info('imp2 - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('imp2', response.readFloatLE(6));
+    imp2:       (response, cb) => {
+        setStates('imp2', response.readFloatLE(6), () => cb());
     },
-    imp3:     function (cmd, response){
-        adapter.log.info('imp3 - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('imp3', response.readFloatLE(6));
+    imp3:       (response, cb) => {
+        setStates('imp3', response.readFloatLE(6), () => cb());
     },
-    imp4:     function (cmd, response){
-        adapter.log.info('imp4 - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('imp4', response.readFloatLE(6));
+    imp4:       (response, cb) => {
+        setStates('imp4', response.readFloatLE(6), () => cb());
     },
-    rateEn:     function (cmd, response){
-        adapter.log.info('rateEn - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('rateEn', +parseFloat(response.readFloatLE(6)).toFixed(4));
+    rateEn:     (response, cb) => {
+        setStates('rateEn', +parseFloat(response.readFloatLE(6)).toFixed(4), () => cb());
     },
-    timeWork:     function (cmd, response){
-        adapter.log.info('timeWork - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('timeWork', response.readFloatLE(6));
+    timeWork:   (response, cb) => {
+        setStates('timeWork', response.readFloatLE(6), () => cb());
     },
-    sysTime:     function (cmd, response){
-        adapter.log.info('sysTime - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
-        setStates('sysTime', concatZero(response[7]) + '.' + concatZero(response[8]) + (response[6] + 2000) + ' ' + concatZero(response[9]) + ':' + concatZero(response[10]) + ':' + concatZero(response[11]));
+    sysTime:    (response, cb) => {
+        const r = response;
+        setStates('sysTime', cZero(r[7]) + '.' + cZero(r[8]) + (r[6] + 2000) + ' ' + cZero(r[9]) + ':' + cZero(r[10]) + ':' + cZero(r[11]), () => cb());
     }
 };
-
-function poll(){
-    const len = [10 + options.read[iter].cmd.length];
-    cmd = [].concat(addr, options.read[iter].code, len, options.read[iter].cmd, [0x78, 0x78]);
-    //adapter.log.info('cmd = ' + cmd);
-    send(cmd, (response) => {
-        adapter.log.info(response.length > 0 ? 'Ответ получен, парсим:' :'Нет ответа на команду, читаем следующую.');
-        if (response.length > 0) options.read[iter].func(cmd, response);
-        response = null;
-        iter++;
-        if (iter > options.read.length - 1){
-            iter = 0;
-            adapter.log.info('Все данные прочитали');
-            timeoutPoll = setTimeout(() => {
-                if (sanext) sanext._events.data = undefined;
-                poll();
-            }, pollingInterval);
-        } else {
-            poll();
-        }
-    });
-}
 
 const options = {
     read: [
@@ -134,31 +91,69 @@ const options = {
         {code: 0x01, cmd: [0x20, 0x00, 0x00, 0x00], desc: 'Чтение мощности', func: func.power},
         {code: 0x01, cmd: [0x80, 0x00, 0x00, 0x00], desc: 'Чтение объема', func: func.volume},
         {code: 0x01, cmd: [0x00, 0x01, 0x00, 0x00], desc: 'Чтение расхода', func: func.rate},
-        {code: 0x01, cmd: [0x00, 0x02, 0x00, 0x00], desc: 'Чтение имп вход 1', func: func.imp1},
-        {code: 0x01, cmd: [0x00, 0x04, 0x00, 0x00], desc: 'Чтение имп вход 2', func: func.imp2},
-        {code: 0x01, cmd: [0x00, 0x08, 0x00, 0x00], desc: 'Чтение имп вход 3', func: func.imp3},
-        {code: 0x01, cmd: [0x00, 0x10, 0x00, 0x00], desc: 'Чтение имп вход 4', func: func.imp4},
+        {code: 0x01, cmd: [0x00, 0x02, 0x00, 0x00], desc: 'Чтение импульсный вход 1', func: func.imp1},
+        {code: 0x01, cmd: [0x00, 0x04, 0x00, 0x00], desc: 'Чтение импульсный вход 2', func: func.imp2},
+        {code: 0x01, cmd: [0x00, 0x08, 0x00, 0x00], desc: 'Чтение импульсный вход 3', func: func.imp3},
+        {code: 0x01, cmd: [0x00, 0x10, 0x00, 0x00], desc: 'Чтение импульсный вход 4', func: func.imp4},
         {code: 0x01, cmd: [0x00, 0x20, 0x00, 0x00], desc: 'Чтение расход (по энергии)', func: func.rateEn},
         {code: 0x01, cmd: [0x00, 0x00, 0x08, 0x00], desc: 'Чтение Время нормальной работы', func: func.timeWork},
         {code: 0x04, cmd: [], desc: 'Чтение системного времени прибора', func: func.sysTime}
     ]
 };
 
+function iteration(){
+    iter++;
+    if (iter > options.read.length - 1){
+        iter = 0;
+        adapter.log.debug('Все данные прочитали');
+        timeoutPoll = setTimeout(() => {
+            if (sanext) sanext._events.data = undefined;
+            poll();
+        }, pollingInterval);
+    } else {
+        poll();
+    }
+}
+
+function poll(){
+    if (pollAllowed){
+        const len = [10 + options.read[iter].cmd.length];
+        cmd = [].concat(addr, options.read[iter].code, len, options.read[iter].cmd, [0x78, 0x78]);
+        adapter.log.debug('------------------------------------------------------------------------------------------------------');
+        adapter.log.debug('Отправляем запрос - ' + options.read[iter].desc);
+        send(cmd, (response) => {
+            if (response.length > 0){
+                const fn = options.read[iter].func;
+                adapter.log.debug('Ответ получен, парсим: ' + fn.name + ' - ' + ' response: ' + JSON.stringify(response) + ' length: ' + response.length);
+                fn(response, () => {
+                    iteration();
+                });
+            } else {
+                adapter.log.debug('Нет ответа на команду, читаем следующую.');
+                iteration();
+            }
+        });
+    }
+}
+
 function send(cmd, cb){
-    adapter.log.info('------------------------------------------------------------------------------------------------------');
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        adapter.log.error('No response');
+        if (sanext) sanext._events.data = undefined;
+        pollAllowed = true;
+        cb && cb('');
+    }, 5000);
     sanext.once('data', (response) => {
-        adapter.log.info('RESPONSE: ' + JSON.stringify(response));
+        adapter.log.debug('RESPONSE: [' + toHexString(response) + ']');
         cb && cb(response);
     });
     const b1 = ((crc(cmd) >> 8) & 0xff);
     cmd[cmd.length] = (crc(cmd) & 0xff);
     cmd[cmd.length] = b1;
     const buf = Buffer.from(cmd);
-    setTimeout(() => {
-        adapter.log.info('Send cmd - [' + toHexString(buf) + ']');
-        adapter.log.info('CMD - ' + JSON.stringify(buf));
-        sanext.write(buf);
-    }, 500);
+    adapter.log.debug('Send cmd - [' + toHexString(buf) + ']');
+    sanext.write(buf);
 }
 
 function toHexString(byteArray){
@@ -167,8 +162,8 @@ function toHexString(byteArray){
     }).join(' ');
 }
 
-function setStates(name, val){
-    adapter.getState(name, function (err, state){
+function setStates(name, val, cb){
+    adapter.getState(name, (err, state) => {
         if (!state){
             adapter.setState(name, {val: val, ack: true});
         } else if (state.val === val){
@@ -177,15 +172,27 @@ function setStates(name, val){
             adapter.setState(name, {val: val, ack: true});
             adapter.log.debug('setState ' + name + ' { oldVal: ' + state.val + ' != newVal: ' + val + ' }');
         }
+        cb && cb();
     });
 }
 
 function main(){
     if (!adapter.systemConfig) return;
     adapter.subscribeStates('*');
-    pollingInterval = adapter.config.pollingtime ? adapter.config.pollingtime :5000;
-    connectTCP();
+    pollingInterval = adapter.config.pollingtime ? parseInt(adapter.config.pollingtime) :5000;
+    if (adapter.config.sn){
+        addr = addrToArray(adapter.config.sn);
+        connectTCP();
+    } else {
+        adapter.log.error('Configured Serial Number Error');
+    }
 }
+
+const addrToArray = (addrSt) => {
+    const _addr = Buffer.allocUnsafe(4);
+    _addr.writeUInt32BE(parseInt(addrSt, 16), 0);
+    return Array.prototype.slice.call(_addr, 0);
+};
 
 function connectTCP(){
     adapter.log.debug('Connect to ' + adapter.config.ip + ':' + adapter.config.port);
@@ -194,7 +201,6 @@ function connectTCP(){
         adapter.log.info('Connected to server ' + adapter.config.ip + ':' + adapter.config.port);
         adapter.setState('info.connection', true, true);
         pollAllowed = true;
-        isOnline = true;
         poll();
     });
     sanext.on('close', (e) => {
@@ -213,7 +219,6 @@ function connectTCP(){
 
 function reconnect(){
     pollAllowed = false;
-    isOnline = false;
     adapter.setState('info.connection', false, true);
     adapter.log.debug('Sanext reconnect after 10 seconds');
     reconnectTimeOut = setTimeout(() => {
@@ -222,11 +227,11 @@ function reconnect(){
     }, 10000);
 }
 
-function concatZero(s){
-    return s < 10 ? '0' + s: s;
+function cZero(s){
+    return s < 10 ? '0' + s :s;
 }
 
-const crc = function (buffer){
+const crc = (buffer) => {
     let crc = 0xFFFF, odd;
     for (let i = 0; i < buffer.length; i++) {
         crc = crc ^ buffer[i];

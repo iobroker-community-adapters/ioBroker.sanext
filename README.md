@@ -1,4 +1,4 @@
-![Logo](admin/sanext.png)
+![Logo](admin/sanext_l.png)
 # ioBroker.sanext
 
 [![NPM version](http://img.shields.io/npm/v/iobroker.sanext.svg)](https://www.npmjs.com/package/iobroker.sanext)
@@ -16,5 +16,5 @@ Receiving data from heat meters Sanext
 
 ## Changelog
 
-### 0.0.1
+### 0.0.2
 * (instalator) initial release
