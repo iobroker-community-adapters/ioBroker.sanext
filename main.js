@@ -145,6 +145,7 @@ function send(cmd, cb){
         cb && cb('');
     }, 5000);
     sanext.once('data', (response) => {
+        clearTimeout(timeout);
         adapter.log.debug('RESPONSE: [' + toHexString(response) + ']');
         cb && cb(response);
     });
