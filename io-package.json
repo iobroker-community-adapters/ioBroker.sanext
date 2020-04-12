@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "sanext",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "news": {
+      "0.0.3": {
+        "en": "Formatting and timer behavior cleaning",
+        "de": "Formatting and timer behavior cleaning",
+        "ru": "Formatting and timer behavior cleaning",
+        "pt": "Formatting and timer behavior cleaning",
+        "nl": "Formatting and timer behavior cleaning",
+        "fr": "Formatting and timer behavior cleaning",
+        "it": "Formatting and timer behavior cleaning",
+        "es": "Formatting and timer behavior cleaning",
+        "pl": "Formatting and timer behavior cleaning",
+        "zh-cn": "Formatting and timer behavior cleaning"
+      },
       "0.0.2": {
         "en": "initial release",
         "de": "Erstveröffentlichung",

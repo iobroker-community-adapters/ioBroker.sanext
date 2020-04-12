@@ -4,14 +4,14 @@ const net = require('net');
 
 let sanext, adapter, pollAllowed = false, reconnectTimeOut = null, timeoutPoll = null, timeout = null, pollingInterval = null, iter = 0, cmd = [], addr;
 
-function startAdapter(options) {
+function startAdapter(options){
     return adapter = utils.adapter(Object.assign({}, options, {
         systemConfig: true,
         name:         'sanext',
         ready:        main,
         unload:       callback => {
             timeoutPoll && clearTimeout(timeoutPoll);
-            reconnectTimeOut && clearTimeout(reconnectTimeOut);            
+            reconnectTimeOut && clearTimeout(reconnectTimeOut);
             timeout && clearTimeout(timeout);
             try {
                 sanext && sanext.destroy();
@@ -91,12 +91,12 @@ const options = {
 
 function iteration(){
     iter++;
-    if (iter > options.read.length - 1) {
+    if (iter > options.read.length - 1){
         iter = 0;
         adapter.log.debug('Все данные прочитали');
         timeoutPoll = setTimeout(() => {
             timeoutPoll = null;
-            if (sanext) {
+            if (sanext){
                 sanext._events.data = undefined;
             }
             poll();
@@ -106,13 +106,13 @@ function iteration(){
     }
 }
 
-function poll() {
-    if (pollAllowed) {
+function poll(){
+    if (pollAllowed){
         const len = [10 + options.read[iter].cmd.length];
         cmd = [].concat(addr, options.read[iter].code, len, options.read[iter].cmd, [0x78, 0x78]);
         adapter.log.debug('------------------------------------------------------------------------------------------------------');
         adapter.log.debug('Отправляем запрос - ' + options.read[iter].desc);
-        
+
         send(cmd, (response) => {
             if (response.length > 0){
                 const fn = options.read[iter].func;
@@ -131,21 +131,21 @@ function send(cmd, cb){
     timeout = setTimeout(() => {
         timeout = null;
         adapter.log.error('No response');
-        
-        if (sanext) {
+
+        if (sanext){
             sanext._events.data = undefined;
         }
-            
+
         pollAllowed = true;
         cb && cb('');
     }, 5000);
-    
+
     sanext.once('data', (response) => {
         timeout && clearTimeout(timeout);
         adapter.log.debug('RESPONSE: [' + toHexString(response) + ']');
         cb && cb(response);
     });
-    
+
     const b1 = (crc(cmd) >> 8) & 0xff;
     cmd[cmd.length] = crc(cmd) & 0xff;
     cmd[cmd.length] = b1;
@@ -177,8 +177,8 @@ function setStates(name, val, cb){
 function main(){
     if (!adapter.systemConfig) return;
     adapter.subscribeStates('*');
-    pollingInterval = adapter.config.pollingtime ? parseInt(adapter.config.pollingtime, 10) : 5000;
-    
+    pollingInterval = adapter.config.pollingtime ? parseInt(adapter.config.pollingtime, 10) :5000;
+
     if (adapter.config.sn){
         addr = addrToArray(adapter.config.sn);
         connectTCP();
@@ -193,10 +193,10 @@ const addrToArray = (addrSt) => {
     return Array.prototype.slice.call(_addr, 0);
 };
 
-function connectTCP() {
+function connectTCP(){
     adapter.log.debug('Connect to ' + adapter.config.ip + ':' + adapter.config.port);
     sanext = new net.Socket();
-    
+
     sanext.connect({host: adapter.config.ip, port: adapter.config.port}, () => {
         adapter.log.info('Connected to server ' + adapter.config.ip + ':' + adapter.config.port);
         adapter.setState('info.connection', true, true);
@@ -217,14 +217,14 @@ function connectTCP() {
     });
 }
 
-function reconnect() {
+function reconnect(){
     pollAllowed = false;
     adapter.setState('info.connection', false, true);
     adapter.log.debug('Sanext reconnect after 10 seconds');
-    
+
     reconnectTimeOut = setTimeout(() => {
         reconnectTimeOut = null;
-        if (sanext) {
+        if (sanext){
             sanext._events.data = undefined;
         }
         connectTCP();
