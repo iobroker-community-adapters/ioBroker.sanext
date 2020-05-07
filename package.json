@@ -1,6 +1,6 @@
 {
   "name": "iobroker.sanext",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Receiving data from heat meters Sanext",
   "author": {
     "name": "instalator",

@@ -1,31 +1,19 @@
 {
   "common": {
     "name": "sanext",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "news": {
-      "0.0.3": {
-        "en": "Formatting and timer behavior cleaning",
-        "de": "Formatting and timer behavior cleaning",
-        "ru": "Formatting and timer behavior cleaning",
-        "pt": "Formatting and timer behavior cleaning",
-        "nl": "Formatting and timer behavior cleaning",
-        "fr": "Formatting and timer behavior cleaning",
-        "it": "Formatting and timer behavior cleaning",
-        "es": "Formatting and timer behavior cleaning",
-        "pl": "Formatting and timer behavior cleaning",
-        "zh-cn": "Formatting and timer behavior cleaning"
-      },
-      "0.0.2": {
-        "en": "initial release",
-        "de": "Erstveröffentlichung",
-        "ru": "Начальная версия",
-        "pt": "lançamento inicial",
-        "nl": "Eerste uitgave",
-        "fr": "Première version",
-        "it": "Versione iniziale",
-        "es": "Versión inicial",
-        "pl": "Pierwsze wydanie",
-        "zh-cn": "首次出版"
+      "0.0.4": {
+        "en": "fixed error",
+        "de": "fixed error",
+        "ru": "fixed error",
+        "pt": "fixed error",
+        "nl": "fixed error",
+        "fr": "fixed error",
+        "it": "fixed error",
+        "es": "fixed error",
+        "pl": "fixed error",
+        "zh-cn": "fixed error"
       }
     },
     "title": "Sanext heat meter",
