@@ -1,8 +1,8 @@
 ![Logo](admin/sanext_l.png)
 # ioBroker.sanext
 
-![Number of Installations](http://iobroker.live/badges/sanext-installed.svg) 
-![Number of Installations](http://iobroker.live/badges/sanext-stable.svg)  
+![Number of Installations](http://iobroker.live/badges/sanext-installed.svg)
+![Number of Installations](http://iobroker.live/badges/sanext-stable.svg)
 [![NPM version](http://img.shields.io/npm/v/iobroker.sanext.svg)](https://www.npmjs.com/package/iobroker.sanext)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.sanext.svg)](https://www.npmjs.com/package/iobroker.sanext)
 [![Tests](https://github.com/instalator/iobroker.sanext/workflows/Test%20and%20Release/badge.svg)](https://github.com/instalator/ioBroker.sanext/actions/)   
