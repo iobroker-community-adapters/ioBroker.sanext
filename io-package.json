@@ -1,19 +1,19 @@
 {
   "common": {
     "name": "sanext",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "news": {
-      "0.0.4": {
-        "en": "fixed error",
-        "de": "fixed error",
-        "ru": "fixed error",
-        "pt": "fixed error",
-        "nl": "fixed error",
-        "fr": "fixed error",
-        "it": "fixed error",
-        "es": "fixed error",
-        "pl": "fixed error",
-        "zh-cn": "fixed error"
+      "0.0.5": {
+        "en": "change test",
+        "de": "change test",
+        "ru": "change test",
+        "pt": "change test",
+        "nl": "change test",
+        "fr": "change test",
+        "it": "change test",
+        "es": "change test",
+        "pl": "change test",
+        "zh-cn": "change test"
       }
     },
     "title": "Sanext heat meter",
