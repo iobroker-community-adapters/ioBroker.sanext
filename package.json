@@ -17,7 +17,7 @@
     "url": "https://github.com/instalator/ioBroker.sanext"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^2.4.0"
+    "@iobroker/adapter-core": "^2.6.8"
   },
   "devDependencies": {
     "@iobroker/testing": "^2.4.2",
