@@ -16,7 +16,6 @@
         "zh-cn": "change test"
       }
     },
-    "title": "Sanext heat meter",
     "titleLang": {
       "en": "Sanext heat meter",
       "de": "Sanext heat meter",
@@ -48,15 +47,18 @@
       "Sanext",
       "heat meter"
     ],
-    "license": "MIT",
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
     "platform": "Javascript/Node.js",
-    "main": "main.js",
     "icon": "sanext.png",
     "enabled": false,
     "messagebox": false,
     "extIcon": "https://raw.githubusercontent.com/instalator/ioBroker.sanext/master/admin/sanext.png",
     "readme": "https://github.com/instalator/ioBroker.sanext/blob/master/README.md",
     "loglevel": "info",
+    "tier": 2,
     "mode": "daemon",
     "type": "energy",
     "compact": true,
@@ -64,7 +66,12 @@
     "stopBeforeUpdate": true,
     "dependencies": [
       {
-        "js-controller": ">=1.4.2"
+        "js-controller": ">=5.0.19"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=6.13.16"
       }
     ]
   },
