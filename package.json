@@ -6,7 +6,7 @@
     "name": "instalator",
     "email": "vvvalt@mail.ru"
   },
-  "homepage": "https://github.com/instalator/ioBroker.sanext",
+  "homepage": "https://github.com/iobroker-community-adapters/ioBroker.sanext",
   "license": "MIT",
   "keywords": [
     "Sanext",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/instalator/ioBroker.sanext"
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.sanext"
   },
   "engines": {
     "node": ">=18"
@@ -61,7 +61,7 @@
     "release": "release-script"
   },
   "bugs": {
-    "url": "https://github.com/instalator/ioBroker.sanext/issues"
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.sanext/issues"
   },
   "readmeFilename": "README.md"
 }
