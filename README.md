@@ -40,7 +40,7 @@ Receiving data from heat meters Sanext
 ## License
 MIT License
 
-Copyright (c) 2023-2024 ioBroker Community Developers <iobroker-community-adapters@gmx.de>  
+Copyright (c) 2023-2025 ioBroker Community Developers <iobroker-community-adapters@gmx.de>  
 Copyright (c) 2021 instalator <vvvalt@mail.ru>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
