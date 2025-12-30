@@ -2,10 +2,10 @@
   "name": "iobroker.sanext",
   "version": "0.1.0",
   "description": "Receiving data from heat meters Sanext",
-  "author": {
-    "name": "instalator",
-    "email": "vvvalt@mail.ru"
-  },
+  "author": "instalator <vvvalt@mail.ru>",
+  "contributors": [
+    "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
+  ],
   "homepage": "https://github.com/iobroker-community-adapters/ioBroker.sanext",
   "license": "MIT",
   "keywords": [
