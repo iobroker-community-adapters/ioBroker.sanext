@@ -9,6 +9,7 @@
   "homepage": "https://github.com/iobroker-community-adapters/ioBroker.sanext",
   "license": "MIT",
   "keywords": [
+    "ioBroker",
     "Sanext",
     "heat meter"
   ],
