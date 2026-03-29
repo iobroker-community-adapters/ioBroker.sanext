@@ -1,6 +1,6 @@
 'use strict';
 const utils = require('@iobroker/adapter-core');
-const net = require('net');
+const net = require('node:net');
 
 let sanext, adapter, pollAllowed = false, reconnectTimeOut = null, timeoutPoll = null, timeout = null, pollingInterval = null, iter = 0, cmd = [], addr;
 
