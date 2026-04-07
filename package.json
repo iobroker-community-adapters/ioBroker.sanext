@@ -17,7 +17,7 @@
     "url": "https://github.com/iobroker-community-adapters/ioBroker.sanext"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.1.6"
