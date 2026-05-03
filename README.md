@@ -43,6 +43,8 @@ Receiving data from heat meters Sanext
 ### 0.0.2
 * (instalator) initial release
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 MIT License
 
