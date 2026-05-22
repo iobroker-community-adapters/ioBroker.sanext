@@ -1,0 +1,7 @@
+{
+  "sanext adapter": "sanext 的适配器设置",
+  "ip": "IP address",
+  "port": "port",
+  "pollingtime": "polling time (ms)",
+  "sn": "Serial number"
+}

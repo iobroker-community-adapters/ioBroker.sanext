@@ -1,0 +1,7 @@
+{
+  "sanext adapter": "Ajustes del adaptador para sanext",
+  "ip": "IP address",
+  "port": "port",
+  "pollingtime": "polling time (ms)",
+  "sn": "Serial number"
+}

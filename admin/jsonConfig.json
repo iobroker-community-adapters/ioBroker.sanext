@@ -1,0 +1,47 @@
+{
+  "i18n": true,
+  "type": "panel",
+  "items": {
+    "ip": {
+      "type": "text",
+      "label": "ip",
+      "newLine": true,
+      "xs": 12,
+      "sm": 6,
+      "md": 4,
+      "lg": 3,
+      "xl": 3
+    },
+    "port": {
+      "type": "number",
+      "label": "port",
+      "min": 0,
+      "max": 65535,
+      "xs": 12,
+      "sm": 6,
+      "md": 4,
+      "lg": 3,
+      "xl": 3
+    },
+    "pollingtime": {
+      "type": "number",
+      "label": "pollingtime",
+      "min": 500,
+      "xs": 12,
+      "sm": 6,
+      "md": 4,
+      "lg": 3,
+      "xl": 3
+    },
+    "sn": {
+      "type": "text",
+      "label": "sn",
+      "newLine": true,
+      "xs": 12,
+      "sm": 6,
+      "md": 4,
+      "lg": 3,
+      "xl": 3
+    }
+  }
+}
